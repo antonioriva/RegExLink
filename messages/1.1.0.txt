@@ -1,0 +1,8 @@
+RegExLink - 1.1.0
+---------------
+
+RegExLink - 1.1.0
+
+A Sublime Text plugin that open links and commands formatting it using a regular expression.
+
+- First version

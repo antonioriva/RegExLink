@@ -1,0 +1,34 @@
+{
+   
+   "regex_link_mark_style": "circle", // alternatives are: dot, circle, bookmark and cross
+   "regex_link_def": [
+      // URL 
+      { 
+         "name" : "Url",
+         "regex" : "(http://[^\\s]+)",
+         "link" : "$1",
+         "style": "string"  // alternatives are: string, invalid, variable, comment, variable.parameter
+      },
+      // Open a path like C:\Users\Antonio\Documenti using Explorer 
+      { 
+         "name" : "Filesystem",
+         "regex" : "file://([^\\s]+)",
+         "command" : "explorer c:\\$1",
+         "style": "comment"
+      },
+      // Search on Google 
+      //{ 
+      //   "name" : "Google",
+      //   "regex" : "GOOGLE:([^\\s]+)",
+      //   "link" : "https://www.google.it/search?q=$1",
+      //   "style": "variable"
+      //},
+      //{ 
+      //   "name" : "Wikipedia",
+      //   "regex" : "WIKI #([a-zA-Z0-9]+)",
+      //   "link" : "http://en.wikipedia.org/wiki/$1",
+      //   "style": "string"
+      //},
+   ]
+}
+
