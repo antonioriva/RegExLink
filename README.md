@@ -44,7 +44,7 @@ configured.
 
 Automatically maches are highlighted with colour of the style, so you can see something like in the following screenshot.
 
-![](images/screenshot.png)
+![](images/screenshot1.png)
 
 To open the link, use the command *Open Link from Regular Expression*, al selected region (you can also open multiple link 
 with one command) or what is under the caret will be launched. You can also use the entry in the contextual menu.
