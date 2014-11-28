@@ -9,11 +9,12 @@
          "link" : "$1",
          "style": "string"  // alternatives are: string, invalid, variable, comment, variable.parameter
       },
+
       // Open a path like C:\Users\Antonio\Documenti using Explorer 
       { 
          "name" : "Filesystem",
-         "regex" : "file://([^\\s]+)",
-         "command" : "explorer c:\\$1",
+         "regex" : "file://(([^\\s\\\"]+(\\s[^\\s\\\"])*)+)",
+         "command" : "explorer $1",
          "style": "comment"
       },
       // Search on Google 
