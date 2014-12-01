@@ -4,7 +4,8 @@
 import sublime
 import sublime_plugin
 import webbrowser
-from subprocess import call
+import subprocess
+import shlex
 
 REGION_NAME = "RegExLink"
 
@@ -40,7 +41,6 @@ class RegExLinkEventCommand(sublime_plugin.EventListener):
 
 
 class RegExLinkCommand(sublime_plugin.TextCommand):
-
     def run(self, edit):
         settings = sublime.load_settings("RegExLink.sublime-settings")
         regex_link_def = settings.get('regex_link_def')
@@ -60,8 +60,11 @@ class RegExLinkCommand(sublime_plugin.TextCommand):
                 for sel in self.view.sel():
                     for region in zip(result, extract):
                         if sel.b >= region[0].a and sel.a <= region[0].b:
-                            print(region[1].split(" "))
-                            call(region[1].split(" "))
+                            command = shlex.split(region[1])
+                            try:
+                                subprocess.Popen(command)
+                            except:
+                                sublime.error_message("Error executing: \n\n" + " ".join(command))
 
     def is_visible(self, paths=None):
         return True
