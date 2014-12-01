@@ -54,4 +54,4 @@ with one command) or what is under the caret will be launched. You can also use 
 The command for shortcut association is *reg_ex_link*
 
 ## License
-Copyright 2014-2014 [Antonio Riva](http://www.antonioriva.com)
+Copyright 2014-2014 [Antonio Riva](http://www.antonioriva.net)
