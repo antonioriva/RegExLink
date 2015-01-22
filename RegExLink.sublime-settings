@@ -5,7 +5,7 @@
       // URL 
       { 
          "name" : "Url",
-         "regex" : "(http://[^\\s]+)",
+         "regex" : "(https?://[^\\s]+)",
          "link" : "$1",
          "style": "string"  // alternatives are: string, invalid, variable, comment, variable.parameter
       },
