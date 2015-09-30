@@ -51,6 +51,9 @@ class RegExLinkEventCommand(sublime_plugin.EventListener):
 
 
 class RegExLinkCommand(sublime_plugin.TextCommand):
+
+    contentmenu = ""
+
     def run(self, edit):
         settings = sublime.load_settings("RegExLink.sublime-settings")
         regex_link_def = settings.get('regex_link_def')
@@ -59,19 +62,20 @@ class RegExLinkCommand(sublime_plugin.TextCommand):
         os.chdir(currfolder)
         for link_def in regex_link_def:
             extract = []
-
             if 'link' in link_def:
-                result = self.view.find_all(link_def['regex'], 0, link_def['link'], extract)
-                for sel in self.view.sel():
-                    for region in zip(result, extract):
-                        if sel.b >= region[0].a and sel.a <= region[0].b:
-                            webbrowser.open(region[1])
+                linktype = 'link'
+            elif 'command' in link_def:
+                linktype = 'command'
+            else:
+                continue
 
-            if 'command' in link_def:
-                result = self.view.find_all(link_def['regex'], 0, link_def['command'], extract)
-                for sel in self.view.sel():
-                    for region in zip(result, extract):
-                        if sel.b >= region[0].a and sel.a <= region[0].b:
+            result = self.view.find_all(link_def['regex'], 0, link_def[linktype], extract)
+            for sel in self.view.sel():
+                for region in zip(result, extract):
+                    if sel.b >= region[0].a and sel.a <= region[0].b:
+                        if linktype == 'link':
+                            webbrowser.open(region[1])
+                        elif linktype == 'command':
                             command = shlex.split(region[1])
                             try:
                                 subprocess.Popen(command)
@@ -79,4 +83,29 @@ class RegExLinkCommand(sublime_plugin.TextCommand):
                                 sublime.error_message("Error executing: \n\n" + " ".join(command))
 
     def is_visible(self, paths=None):
-        return True
+        if self.contentmenu != "":
+            return True
+        else:
+            return False
+
+    def description(self):
+            settings = sublime.load_settings("RegExLink.sublime-settings")
+            regex_link_def = settings.get('regex_link_def')
+            for link_def in regex_link_def:
+                extract = []
+                if 'link' in link_def:
+                    linktype = 'link'
+                elif 'command' in link_def:
+                    linktype = 'command'
+                else:
+                    continue
+
+                result = self.view.find_all(link_def['regex'], 0, link_def[linktype], extract)
+                for sel in self.view.sel():
+                    for region in zip(result, extract):
+                        if sel.b >= region[0].a and sel.a <= region[0].b:
+                            self.contentmenu = link_def['name'] + " " + self.view.substr(region[0])
+                            return "Open " + self.contentmenu
+                        else:
+                            self.contentmenu = ""
+            return "Open " + self.contentmenu
