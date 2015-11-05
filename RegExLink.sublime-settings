@@ -1,22 +1,29 @@
 {
 
-   "regex_link_mark_style": "circle", // alternatives are: dot, circle, bookmark and cross
+   "regex_link_mark_style": "dot", // alternatives are: dot, circle, bookmark and cross
    "regex_link_def": [
-      // URL
+      // LBR setTemplate ("COfrmDispatcher.lbr", "F0000002");
       {
-         "name" : "Url",
-         "regex" : "(https?://[^\\s]+)",
-         "link" : "$1",
+         "name" : "LBR",
+         "regex" : "(?i:([\\w]+\\.lbr))",
+         "command" : "RSDesigner.exe $1",
          "style": "string"  // alternatives are: string, invalid, variable, comment, variable.parameter
-      },
+      }
+      // URL
+      // {
+      //    "name" : "Url",
+      //    "regex" : "(https?://[^\\s]+)",
+      //    "link" : "$1",
+      //    "style": "string"  // alternatives are: string, invalid, variable, comment, variable.parameter
+      // },
 
       // Open a path like C:\Users\Antonio\Documenti using Explorer
-      {
-         "name" : "Filesystem",
-         "regex" : "file://(([^\\s\\\"]+(\\s[^\\s\\\"])*)+)",
-         "command" : "explorer $1",
-         "style": "comment"
-      },
+      // {
+      //    "name" : "Filesystem",
+      //    "regex" : "file://(([^\\s\\\"]+(\\s[^\\s\\\"])*)+)",
+      //    "command" : "explorer $1",
+      //    "style": "comment"
+      // },
       // Search on Google
       //{
       //   "name" : "Google",
@@ -31,6 +38,6 @@
       //   "style": "string"
       //},
    ],
-   "regex_link_outlines": true
+   "regex_link_outlines": false,
 }
 
