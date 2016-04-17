@@ -63,7 +63,8 @@ class RegExLinkCommand(sublime_plugin.TextCommand):
         regex_link_def = settings.get('regex_link_def')
         currfolder = sublime.expand_variables(
             "$folder", sublime.active_window().extract_variables())
-        os.chdir(currfolder)
+        if (currfolder is not None and currfolder != ''):
+            os.chdir(currfolder)
         for link_def in regex_link_def:
             extract = []
             if 'link' in link_def:
@@ -86,7 +87,7 @@ class RegExLinkCommand(sublime_plugin.TextCommand):
                                 subprocess.Popen(command)
                             except:
                                 sublime.error_message(
-                                   "Error executing: \n\n" + " ".join(command))
+                                    "Error executing: \n\n" + " ".join(command))
 
     def is_visible(self, paths=None):
         if self.contentmenu != "":
