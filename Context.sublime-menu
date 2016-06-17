@@ -1,4 +1,4 @@
 [
    { "caption": "-" },
-   { "caption": "Open Link from Regular Expression", "command": "reg_ex_link" },
+   {"command": "reg_ex_link" },
 ]
